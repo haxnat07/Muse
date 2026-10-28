@@ -5,7 +5,7 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { useMotion } from "./MotionProvider";
 
 /*
- * Page-wide effects: margin progress line, header contrast + logo spin, ink-fill buttons,
+ * Page-wide effects: header contrast + logo spin, ink-fill buttons,
  * magnetic buttons and the custom cursor. Rendered last so its triggers measure after every pin.
  */
 export default function GlobalMotion() {
@@ -29,7 +29,6 @@ export default function GlobalMotion() {
 
   useGSAP(() => {
     if (!motion) return;
-    gsap.to("#progress", { scaleY: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
     ScrollTrigger.create({ trigger: "#services", start: "top 60px", end: "bottom 60px", toggleClass: { targets: "#siteHeader", className: "on-dark" } });
     gsap.to("#headLogo", { rotate: 360, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 1 } });
 
@@ -81,10 +80,6 @@ export default function GlobalMotion() {
     <>
       <div ref={dot} id="cDot" aria-hidden="true" />
       <div ref={ring} id="cRing" aria-hidden="true"><span ref={label}>Read</span></div>
-      {/* reading progress in the margin */}
-      <div className="fixed left-3 sm:left-5 top-0 bottom-0 w-px bg-ink/10 z-40 hidden md:block" aria-hidden="true">
-        <div id="progress" className="w-full h-full bg-red-pen origin-top" style={{ transform: "scaleY(0)" }} />
-      </div>
     </>
   );
 }
